@@ -49,3 +49,30 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+net_str = input('Введите IP-сети в формате "10.1.1.0/24": ')
+net = net_str.split('/')[0]
+net_okt1, net_okt2, net_okt3, net_okt4 = net.split('.')[0], net.split('.')[1], net.split('.')[2], net.split('.')[3]
+ip_bin_str ='{:>08b}'.format(int(net_okt1)) + '{:>08b}'.format(int(net_okt2)) + '{:>08b}'.format(int(net_okt3)) + '{:>08b}'.format(int(net_okt4))
+
+
+mask = net_str.split('/')[1]
+mask_bin_str = '1' * int(mask) + "0" * (32-int(mask))
+mask_bin_str_1 = mask_bin_str[0:8]
+mask_bin_str_2 = mask_bin_str[8:16]
+mask_bin_str_3 = mask_bin_str[16:24]
+mask_bin_str_4 = mask_bin_str[24:32]
+net_bin_str = ip_bin_str[0:int(mask)] + "0" * (32-int(mask))
+net_bin_str_1 = net_bin_str[0:8]
+net_bin_str_2 = net_bin_str[8:16]
+net_bin_str_3 = net_bin_str[16:24]
+net_bin_str_4 = net_bin_str[24:32]
+
+
+print('Network:')
+print('{:<10}{:<10}{:<10}{:<10}'.format(int(net_bin_str_1, 2),int(net_bin_str_2, 2),int(net_bin_str_3, 2),int(net_bin_str_4, 2)))
+print('{}  {}  {}  {}'.format(net_bin_str_1, net_bin_str_2, net_bin_str_3, net_bin_str_4))
+
+print('Mask:')
+print('/'+mask)
+print('{:<10}{:<10}{:<10}{:<10}'.format(int(mask_bin_str_1,2), int(mask_bin_str_2, 2), int(mask_bin_str_3, 2), int(mask_bin_str_4, 2)))
+print('{:>08}  {:>08}  {:>08}  {:>08}'.format(mask_bin_str_1, mask_bin_str_2, mask_bin_str_3, mask_bin_str_4))
