@@ -36,3 +36,4 @@ interface = input('Введите тип и номер интерфейса: ')
 vlans = input(template_vlans[mode])
 print('interface ' + interface)
 print('\n'.join(template[mode]).format(vlans))
+
