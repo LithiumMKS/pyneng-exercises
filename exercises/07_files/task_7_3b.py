@@ -17,3 +17,19 @@ Enter VLAN number: 10
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+vlan = int(input('Enter VLAN number: '))
+fdb_temp = '{:<8} {:<19} {:<10}'
+fdb_list = []
+with open('CAM_table.txt') as f:
+    for line in f:
+        if line.find('Gi') != -1:
+            line_list = line.split()
+            if line_list[2] == 'DYNAMIC':
+                poped_str = int(line_list.pop(0))
+                line_list.insert(0, poped_str)
+                line_list.remove('DYNAMIC')
+                fdb_list.append(line_list)
+
+for sublist in sorted(fdb_list):
+    if sublist[0] == vlan:
+        print(fdb_temp.format(str(sublist[0]), sublist[1], sublist[2]))
