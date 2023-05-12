@@ -20,3 +20,12 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+fdb_temp = '{:<8} {:<19} {:<10}'
+with open('CAM_table.txt') as f:
+    for line in f:
+        if line.find('Gi') != -1:
+            line_list = line.split()
+            if line_list[2] == 'DYNAMIC':
+                print(fdb_temp.format(line_list[0], line_list[1], line_list[3]))
+
+
